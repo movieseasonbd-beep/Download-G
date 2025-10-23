@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Page Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ডাউনলোড পেজ তৈরি করুন</h1>
+        <p>আপনার ডাউনলোড লিঙ্ক এবং বাটনের নাম দিন।</p>
+        
+        <div id="links-container">
+            <!-- জাভাস্ক্রিপ্ট দিয়ে এখানে ইনপুট যোগ হবে -->
+        </div>
+        
+        <button id="add-link-btn" class="secondary-btn">আরও লিঙ্ক যোগ করুন</button>
+        <button id="generate-btn">ল্যান্ডিং পেজ লিঙ্ক তৈরি করুন</button>
+        
+        <div id="output-container" class="hidden">
+            <h2>আপনার ল্যান্ডিং পেজের লিঙ্ক</h2>
+            <div class="output-box">
+                <input type="text" id="output-link" readonly>
+                <button id="copy-btn">কপি করুন</button>
+            </div>
+        </div>
+    </div>
+    <script src="generator.js"></script>
+</body>
+</html>
