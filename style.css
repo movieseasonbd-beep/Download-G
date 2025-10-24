@@ -106,7 +106,7 @@ body.dark-theme {
     box-shadow: 0 0 20px rgba(255, 31, 31, 0.2); 
 }
 .movie-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 0 5px; }
-#movie-title { font-size: 1.6em; color: var(--text-light); margin: 0; text-align: left; font-weight: 700; }
+#movie-title { font-size: 1.11em; color: var(--text-light); margin: 0; text-align: left; font-weight: 700; }
 #language-tags { display: flex; gap: 6px; }
 .lang-tag { background-color: var(--primary-red); color: white; padding: 4px 12px; font-size: 0.8em; border-radius: 6px; font-weight: 600; }
 .movie-poster { width: 100%; border-radius: 12px; display: block; }
