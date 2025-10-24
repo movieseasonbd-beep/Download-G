@@ -40,7 +40,11 @@ button { background-color: var(--primary-red); color: white; border: none; paddi
 
 /* Dark Theme and Download Page Styles */
 body.dark-theme {
-    background-color: var(--dark-bg);
+    /* === নতুন কালো থেকে লাল ব্যাকগ্রাউন্ড ইফেক্ট === */
+    background-color: #5c0c0c; /* একটি গভীর লাল রঙ যা গ্রেডিয়েন্টের শেষে দেখা যাবে */
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(0, 0, 0, 0.9) 0%, transparent 70%);
+    background-repeat: no-repeat;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,8 +71,27 @@ body.dark-theme {
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
-.logo-container { flex-shrink: 0; }
-.logo { width: 32px; height: 32px; }
+
+/* Circular Logo with Red/Black Background */
+.logo-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background-color: #000000;
+    background-image: radial-gradient(circle at center, rgba(255, 31, 31, 0.5) 0%, rgba(0,0,0,0) 70%);
+    border: 1px solid rgba(255, 31, 31, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.logo {
+    width: 26px;
+    height: 26px;
+}
+
 .header-title-container { display: flex; flex-direction: column; line-height: 1.1; }
 .header-text { color: var(--primary-red); font-weight: 700; font-size: 1.2em; }
 .spaced-text { text-transform: uppercase; letter-spacing: 5px; color: var(--text-light); font-weight: 500; font-size: 0.85em;}
