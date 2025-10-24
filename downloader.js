@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const desc = params.get(`ds${i}`);
         const url = params.get(`ul${i}`);
         
-        // Generate badge text from label (e.g., 1080p -> HD, 720p -> FHD, 4k -> 4K)
         let badgeText = 'SD';
         if (label.includes('1080')) badgeText = 'HD';
         if (label.includes('720')) badgeText = 'FHD';
