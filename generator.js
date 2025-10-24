@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const linksContainer = document.getElementById('links-container');
     const addLinkBtn = document.getElementById('add-link-btn');
     const generateBtn = document.getElementById('generate-btn');
-    // ... ( other element selections )
     const outputContainer = document.getElementById('output-container');
     const outputLinkInput = document.getElementById('output-link');
     const copyBtn = document.getElementById('copy-btn');
