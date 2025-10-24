@@ -5,8 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const movieTitle = params.get('title');
     const posterLink = params.get('poster');
     const languages = params.get('langs');
+    const pageTitle = document.querySelector('title');
 
-    if (movieTitle) document.getElementById('movie-title').textContent = movieTitle;
+    if (movieTitle) {
+        document.getElementById('movie-title').textContent = movieTitle;
+        pageTitle.textContent = `${movieTitle} - Download Links`; // Set page title
+    }
     if (posterLink) document.getElementById('poster-img').src = posterLink;
     
     const languageTagsContainer = document.getElementById('language-tags');
@@ -44,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>${desc}</p>
                 </div>
                 <a href="${url}" class="download-button" download>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15.586l-4.293-4.293a1 1 0 00-1.414 1.414l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414L12 15.586zM12 4a1 1 0 00-1 1v8a1 1 0 002 0V5a1 1 0 00-1-1z"/></svg>
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     <span>Download</span>
                 </a>
             </div>
