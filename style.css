@@ -8,7 +8,7 @@
     --text-light: #ffffff;
     --text-dark: #8c8c8c;
     --border-color: #333333;
-    --box-bg: #0d0d0d;
+    --box-bg: #120101;
 }
 
 body {
@@ -61,7 +61,7 @@ body.dark-theme {
     width: 100%; 
     max-width: 400px; 
     box-sizing: border-box;
-    padding: 8px 15px; 
+    padding: 8px 8px; 
     border-radius: 50px;
     
     /* Glassmorphism Effect */
@@ -88,13 +88,13 @@ body.dark-theme {
 }
 
 .logo {
-    width: 26px;
-    height: 26px;
+    width: 40px;
+    height: 40px;
 }
 
 .header-title-container { display: flex; flex-direction: column; line-height: 1.1; }
 .header-text { color: var(--primary-red); font-weight: 700; font-size: 1.2em; }
-.spaced-text { text-transform: uppercase; letter-spacing: 5px; color: var(--text-light); font-weight: 500; font-size: 0.85em;}
+.spaced-text { text-transform: uppercase; letter-spacing: 11px; color: var(--text-light); font-weight: 500; font-size: 0.8em;}
 
 .download-container { width: 100%; max-width: 400px; }
 .movie-card { 
