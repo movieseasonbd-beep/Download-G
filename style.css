@@ -1,5 +1,5 @@
 /* General and Generator Page Styles */
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap');
 
 :root {
     --primary-red: #e50914;
@@ -7,6 +7,7 @@
     --card-bg: #1D1D1D;
     --text-light: #f5f5f5;
     --text-dark: #a0a0a0;
+    --border-color: #2f2f2f;
 }
 
 body {
@@ -43,29 +44,29 @@ body.dark-theme {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 20px;
+    padding: 20px 15px;
 }
-.page-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-.logo { width: 30px; height: 30px; }
-.header-text { color: var(--text-light); font-weight: bold; font-size: 1.2em; }
-.spaced-text { letter-spacing: 5px; }
+.page-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; background-color: #1a1a1a; padding: 8px 15px; border-radius: 12px; width: 100%; max-width: 400px; box-sizing: border-box;}
+.logo { width: 28px; height: 28px; }
+.header-text { color: var(--primary-red); font-weight: bold; font-size: 1.1em; }
+.spaced-text { text-transform: uppercase; letter-spacing: 5px; color: var(--text-light); }
 
 .download-container { width: 100%; max-width: 400px; }
-.movie-card { background-color: var(--card-bg); border: 1px solid #333; border-radius: 16px; padding: 15px; margin-bottom: 20px; }
-.movie-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-#movie-title { font-size: 1.4em; color: var(--text-light); margin: 0; text-align: left; }
-#language-tags { display: flex; gap: 5px; }
-.lang-tag { background-color: var(--primary-red); color: white; padding: 4px 10px; font-size: 0.8em; border-radius: 6px; font-weight: bold; }
+.movie-card { background-color: var(--dark-bg); border: 2px solid var(--border-color); border-radius: 16px; padding: 12px; margin-bottom: 20px; box-shadow: 0 0 15px rgba(0,0,0,0.4); }
+.movie-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 0 5px; }
+#movie-title { font-size: 1.5em; color: var(--text-light); margin: 0; text-align: left; font-weight: 700; }
+#language-tags { display: flex; gap: 6px; }
+.lang-tag { background-color: var(--primary-red); color: white; padding: 4px 12px; font-size: 0.8em; border-radius: 6px; font-weight: 600; }
 .movie-poster { width: 100%; border-radius: 12px; }
 
-.download-section { background-color: var(--card-bg); border: 1px solid #333; border-radius: 16px; padding: 15px; }
-.download-section h2 { color: var(--text-light); text-align: left; margin: 0 0 15px 5px; }
-#download-links-container { display: flex; flex-direction: column; gap: 10px; }
-.download-item { display: flex; align-items: center; justify-content: space-between; background-color: var(--dark-bg); padding: 10px; border-radius: 12px; }
-.quality-badge { width: 40px; height: 40px; background-color: #333; color: var(--text-light); display: flex; justify-content: center; align-items: center; font-weight: bold; border-radius: 8px; border: 1px solid #444; }
-.download-info { flex-grow: 1; margin-left: 15px; }
-.download-info h3 { margin: 0; color: var(--text-light); font-size: 1.1em; }
-.download-info p { margin: 0; color: var(--text-dark); font-size: 0.8em; text-align: left; }
-.download-button { background-color: var(--primary-red); color: white; text-decoration: none; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-weight: 500; transition: background-color 0.2s; }
-.download-button svg { width: 18px; height: 18px; }
+.download-section { background-color: var(--card-bg); border-radius: 16px; padding: 15px; }
+.download-section h2 { color: var(--text-light); text-align: left; margin: 0 0 15px 5px; font-weight: 600; }
+#download-links-container { display: flex; flex-direction: column; gap: 12px; }
+.download-item { display: flex; align-items: center; justify-content: space-between; background-color: var(--dark-bg); padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); }
+.quality-badge { width: 40px; height: 40px; background-color: #333; color: var(--text-light); display: flex; justify-content: center; align-items: center; font-weight: bold; border-radius: 8px; flex-shrink: 0; }
+.download-info { flex-grow: 1; margin: 0 15px; }
+.download-info h3 { margin: 0; color: var(--text-light); font-size: 1.1em; font-weight: 600; }
+.download-info p { margin: 2px 0 0 0; color: var(--text-dark); font-size: 0.8em; text-align: left; }
+.download-button { background-color: var(--primary-red); color: white; text-decoration: none; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-weight: 500; transition: background-color 0.2s; white-space: nowrap; }
+.download-button svg { width: 20px; height: 20px; }
 .download-button:hover { background-color: #b00710; }
