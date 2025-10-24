@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,21 +8,28 @@
 </head>
 <body>
     <div class="container">
-        <h1>ডাউনলোড পেজ তৈরি করুন</h1>
-        <p>আপনার ডাউনলোড লিঙ্ক এবং বাটনের নাম দিন।</p>
+        <h1>ডাউনলোড পেজ জেনারেটর</h1>
+        <p>নিচের ফর্মটি পূরণ করে আপনার ল্যান্ডিং পেজ তৈরি করুন।</p>
         
-        <div id="links-container">
-            <!-- জাভাস্ক্রিপ্ট দিয়ে এখানে ইনপুট যোগ হবে -->
+        <div class="form-section">
+            <input type="text" id="movie-name" placeholder="মুভির নাম (e.g., Pushpa 2)" required>
+            <input type="url" id="poster-link" placeholder="মুভির পোস্টার লিঙ্ক" required>
+            <input type="text" id="languages" placeholder="ভাষা (e.g., Hindi, Bangla, Tamil)" required>
+        </div>
+
+        <div class="form-section" id="links-container">
+            <h2>ডাউনলোড অপশন</h2>
+            <!-- Download link groups will be added here by JavaScript -->
         </div>
         
-        <button id="add-link-btn" class="secondary-btn">আরও লিঙ্ক যোগ করুন</button>
-        <button id="generate-btn">ল্যান্ডিং পেজ লিঙ্ক তৈরি করুন</button>
+        <button id="add-link-btn" class="secondary-btn">আরও একটি ডাউনলোড অপশন যোগ করুন</button>
+        <button id="generate-btn">ল্যান্ডিং পেজ তৈরি করুন</button>
         
         <div id="output-container" class="hidden">
             <h2>আপনার ল্যান্ডিং পেজের লিঙ্ক</h2>
             <div class="output-box">
                 <input type="text" id="output-link" readonly>
-                <button id="copy-btn">কপি করুন</button>
+                <button id="copy-btn">কপি</button>
             </div>
         </div>
     </div>
