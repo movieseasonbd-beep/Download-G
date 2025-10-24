@@ -1,21 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Links</title>
+    <title>Download Page</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container download-page">
-        <h1>আপনার ফাইল ডাউনলোড করুন</h1>
-        <p>নিচের বাটনগুলো থেকে আপনার পছন্দের কোয়ালিটি ডাউনলোড করুন।</p>
-        
-        <div id="buttons-container">
-            <!-- জাভাস্ক্রিপ্ট দিয়ে এখানে বাটন যোগ হবে -->
-            <p id="loading-message">লিঙ্ক লোড হচ্ছে...</p>
+<body class="dark-theme">
+
+    <header class="page-header">
+        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEg4Z55Bo5nNBHR_jcZF8Ume294Qn2Fo-4chmol3NW_zdzQIwwePJ96bQ1qHWh3j1yNjIek17O1Go4W_iwQEMteJui82h6tgB8BTf7abmxK4CgYIXrcw3CKealveQA0nw5ewSiVdNpv4IoQfgOQADt5cOTmdVNl9juifrerbcFLHDOP_zRYOmZJ8OhRwYSSY" alt="Logo" class="logo">
+        <span class="header-text">MovieSeason Download <span class="spaced-text">Unlimited</span></span>
+    </header>
+
+    <main class="download-container">
+        <div class="movie-card">
+            <div class="movie-header">
+                <h1 id="movie-title">Movie Title</h1>
+                <div id="language-tags">
+                    <!-- Language tags will be injected here -->
+                </div>
+            </div>
+            <img src="" alt="Movie Poster" id="poster-img" class="movie-poster">
         </div>
-    </div>
+
+        <div class="download-section">
+            <h2>Download</h2>
+            <div id="download-links-container">
+                <p id="loading-message">লিঙ্ক লোড হচ্ছে...</p>
+            </div>
+        </div>
+    </main>
+
     <script src="downloader.js"></script>
 </body>
 </html>
