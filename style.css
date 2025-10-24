@@ -65,7 +65,7 @@ body.dark-theme {
     border-radius: 50px;
     
     /* Glassmorphism Effect */
-    background: rgba(26, 26, 26, 0.6);
+    background: rgba(26, 26, 26, 0.41);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
