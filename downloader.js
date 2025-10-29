@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const desc = params.get(`ds${i}`);
         const url = params.get(`ul${i}`);
         
-        let badgeText = 'SD';
-        if (label.includes('1080')) badgeText = 'HD';
-        if (label.includes('720')) badgeText = 'FHD';
-        if (label.toLowerCase().includes('4k')) badgeText = '4K';
+       let badgeText = 'SD'; // ডিফল্ট হিসেবে SD থাকবে
+if (label.includes('720')) badgeText = 'HD'; // 720p হলে HD
+if (label.includes('1080')) badgeText = 'FHD'; // 1080p হলে FHD
+if (label.toLowerCase().includes('4k')) badgeText = '4K'; // 4K হলে 4K
 
         linksHTML += `
             <div class="download-item">
