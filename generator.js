@@ -40,15 +40,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const linkGroups = document.querySelectorAll('.link-group');
         let linkDataFound = false;
-        linkGroups.forEach((group, index) => {
+        let validLinkCounter = 0; // একটি নতুন কাউন্টার যোগ করুন
+
+        linkGroups.forEach(group => { // এখান থেকে index বাদ দিন
             const label = group.querySelector('.link-label').value.trim();
             const desc = group.querySelector('.link-desc').value.trim();
             const url = group.querySelector('.link-url').value.trim();
             
             if (label && desc && url) {
-                params.append(`lb${index}`, label);
-                params.append(`ds${index}`, desc);
-                params.append(`ul${index}`, url);
+                params.append(`lb${validLinkCounter}`, label);
+                params.append(`ds${validLinkCounter}`, desc);
+                params.append(`ul${validLinkCounter}`, url);
+                
+                validLinkCounter++; // শুধুমাত্র সফলভাবে লিঙ্ক যোগ হলেই কাউন্টার বাড়ান
                 linkDataFound = true;
             }
         });
