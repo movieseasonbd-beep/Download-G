@@ -47,14 +47,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const desc = group.querySelector('.link-desc').value.trim();
             const url = group.querySelector('.link-url').value.trim();
             
-            if (label && desc && url) {
-                params.append(`lb${validLinkCounter}`, label);
-                params.append(`ds${validLinkCounter}`, desc);
-                params.append(`ul${validLinkCounter}`, url);
-                
-                validLinkCounter++; // শুধুমাত্র সফলভাবে লিঙ্ক যোগ হলেই কাউন্টার বাড়ান
-                linkDataFound = true;
-            }
+            // শুধুমাত্র লেবেল এবং ইউআরএল থাকলেই লিঙ্ক তৈরি হবে
+if (label && url) { // <<<--- এখান থেকে desc সরানো হয়েছে
+    params.append(`lb${validLinkCounter}`, label);
+    
+    // desc থাকলে যোগ হবে, না থাকলে খালি স্ট্রিং হিসেবে যাবে
+    params.append(`ds${validLinkCounter}`, desc || ''); 
+    
+    params.append(`ul${validLinkCounter}`, url);
+    
+    validLinkCounter++;
+    linkDataFound = true;
+}
         });
 
         if (!linkDataFound) {
