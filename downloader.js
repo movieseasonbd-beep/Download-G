@@ -3,11 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Populate movie info
     const movieTitle = params.get('title');
-    
-    // === পরিবর্তন: পুরনো 'poster' এবং নতুন 'media' দুটোকেই সাপোর্ট করার জন্য ===
-    // যদি 'media' থাকে সেটা নিবে, না থাকলে 'poster' আছে কিনা দেখবে।
-    const finalMediaLink = params.get('media') || params.get('poster'); 
-    
+    const finalMediaLink = params.get('media') || params.get('poster');
     const languages = params.get('langs');
     const pageTitle = document.querySelector('title');
 
@@ -20,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const qualitySelectorContainer = document.getElementById('quality-selector-container');
     const streamingOptions = [];
     let i = 0;
-    while(params.has(`slb${i}`)) {
+    while (params.has(`slb${i}`)) {
         streamingOptions.push({
             label: params.get(`slb${i}`),
             url: params.get(`sul${i}`)
@@ -28,35 +24,80 @@ document.addEventListener('DOMContentLoaded', () => {
         i++;
     }
 
-    // স্ট্রিমিং অপশন বা মিডিয়া লিঙ্ক দেখানোর যুক্তি
     if (streamingOptions.length > 0) {
-        // ড্রপডাউন তৈরি করুন
-        const select = document.createElement('select');
-        select.id = 'quality-selector';
+        // === নতুন কাস্টম ড্রপডাউন লজিক শুরু ===
+
+        // ১. একটি আসল কিন্তু লুকানো <select> ট্যাগ তৈরি করুন যা মান ধরে রাখবে
+        const originalSelect = document.createElement('select');
+        originalSelect.style.display = 'none'; // এটিকে অদৃশ্য রাখুন
         streamingOptions.forEach(option => {
             const opt = document.createElement('option');
             opt.value = option.url;
             opt.textContent = option.label;
-            select.appendChild(opt);
+            originalSelect.appendChild(opt);
         });
-        qualitySelectorContainer.appendChild(select);
+        qualitySelectorContainer.appendChild(originalSelect);
 
-        // iframe প্লেয়ার তৈরি করুন
+        // ২. কাস্টম ড্রপডাউন এর জন্য HTML এলিমেন্ট তৈরি করুন
+        const customSelectContainer = document.createElement('div');
+        customSelectContainer.classList.add('custom-select');
+
+        const selectedItem = document.createElement('div');
+        selectedItem.classList.add('select-selected');
+        selectedItem.innerHTML = originalSelect.options[originalSelect.selectedIndex].innerHTML;
+        customSelectContainer.appendChild(selectedItem);
+
+        const optionsList = document.createElement('div');
+        optionsList.classList.add('select-items', 'select-hide');
+
+        Array.from(originalSelect.options).forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.innerHTML = option.innerHTML;
+            
+            if (index === originalSelect.selectedIndex) {
+                optionDiv.classList.add('same-as-selected');
+            }
+
+            optionDiv.addEventListener('click', function() {
+                originalSelect.selectedIndex = index;
+                selectedItem.innerHTML = this.innerHTML;
+                Array.from(optionsList.children).forEach(child => child.classList.remove('same-as-selected'));
+                this.classList.add('same-as-selected');
+                
+                // আসল select-এ change ইভেন্ট ট্রিগার করুন
+                originalSelect.dispatchEvent(new Event('change'));
+                selectedItem.click(); // অপশন লিস্ট বন্ধ করুন
+            });
+            optionsList.appendChild(optionDiv);
+        });
+
+        customSelectContainer.appendChild(optionsList);
+        qualitySelectorContainer.appendChild(customSelectContainer);
+        
+        // ৩. ক্লিক ইভেন্ট যোগ করুন
+        selectedItem.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeAllSelect(this);
+            optionsList.classList.toggle('select-hide');
+        });
+
+        // ৪. iframe প্লেয়ার তৈরি করুন
         const iframe = document.createElement('iframe');
         iframe.className = 'movie-poster';
-        iframe.src = streamingOptions[0].url; // প্রথম লিঙ্কটি ডিফল্ট হিসেবে দেখাবে
+        iframe.src = streamingOptions[0].url;
         iframe.frameBorder = "0";
         iframe.allowFullscreen = true;
         mediaContainer.appendChild(iframe);
 
-        // ড্রপডাউন পরিবর্তনের ইভেন্ট লিসেনার
-        select.addEventListener('change', (e) => {
-            iframe.src = e.target.value;
+        // আসল select পরিবর্তনের ইভেন্ট লিসেনার
+        originalSelect.addEventListener('change', () => {
+            iframe.src = originalSelect.value;
         });
 
-    } else if (finalMediaLink) { // === পরিবর্তন: এখানে finalMediaLink ব্যবহার করা হয়েছে ===
-        // যদি শুধু একটি মিডিয়া লিঙ্ক থাকে (পোস্টার বা ভিডিও)
-        // লিঙ্কটি প্লেয়ারের কিনা তা जांच করা হচ্ছে
+        // === নতুন কাস্টম ড্রপডাউন লজিক শেষ ===
+
+    } else if (finalMediaLink) {
+        // ... (বাকি কোড অপরিবর্তিত) ...
         if (finalMediaLink.includes('vercel.app') || finalMediaLink.includes('youtube.com/embed')) {
             const iframe = document.createElement('iframe');
             iframe.className = 'movie-poster';
@@ -65,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
             iframe.allowFullscreen = true;
             mediaContainer.appendChild(iframe);
         } else {
-            // লিঙ্কটি একটি ছবি হলে
             const img = document.createElement('img');
             img.className = 'movie-poster';
             img.src = finalMediaLink;
@@ -76,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const languageTagsContainer = document.getElementById('language-tags');
     if (languages) {
-        languageTagsContainer.style.marginTop = '8px'; // ভাষা ট্যাগ থাকলে ড্রপডাউন থেকে একটু নিচে দেখাবে
         languages.split(',').forEach(lang => {
             const tag = document.createElement('span');
             tag.className = 'lang-tag';
@@ -85,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ডাউনলোড লিঙ্ক পপুলেট করার কোড
+    // ... (ডাউনলোড লিঙ্ক পপুলেট করার কোড অপরিবর্তিত) ...
     const linksContainer = document.getElementById('download-links-container');
     const loadingMessage = document.getElementById('loading-message');
     let linksHTML = '';
@@ -95,25 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const label = params.get(`lb${j}`);
         const desc = params.get(`ds${j}`);
         const url = params.get(`ul${j}`);
-        
-        let badgeText = 'SD'; 
+        let badgeText = 'SD';
         if (label.includes('720')) badgeText = 'HD';
         if (label.includes('1080')) badgeText = 'FHD';
         if (label.toLowerCase().includes('4k')) badgeText = '4K';
-
-        linksHTML += `
-            <div class="download-item">
-                <div class="quality-badge">${badgeText}</div>
-                <div class="download-info">
-                    <h3>${label}</h3>
-                    <p>${desc}</p>
-                </div>
-                <a href="${url}" class="download-button" download>
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                    <span>Download</span>
-                </a>
-            </div>
-        `;
+        linksHTML += `<div class="download-item"><div class="quality-badge">${badgeText}</div><div class="download-info"><h3>${label}</h3><p>${desc}</p></div><a href="${url}" class="download-button" download><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg><span>Download</span></a></div>`;
         j++;
     }
 
@@ -123,4 +148,17 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         loadingMessage.textContent = 'কোনো ডাউনলোড লিঙ্ক পাওয়া যায়নি।';
     }
+
+    function closeAllSelect(elmnt) {
+        const x = document.getElementsByClassName("select-items");
+        const y = document.getElementsByClassName("select-selected");
+        for (let i = 0; i < y.length; i++) {
+            if (elmnt == y[i]) {
+                // continue;
+            } else {
+                x[i].classList.add("select-hide");
+            }
+        }
+    }
+    document.addEventListener("click", closeAllSelect);
 });
