@@ -11,22 +11,12 @@
     --box-bg: #1d0101;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
-    font-family: 'Roboto', 'Poppins', sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 20px;
+    font-family: 'Roboto', 'Poppins', sans-serif; background-color: #f0f2f5; color: #333;
+    display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px;
 }
-
 .container { background-color: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); width: 100%; max-width: 600px; }
 h1, h2 { text-align: center; }
 p { text-align: center; color: #666; margin-bottom: 20px; }
@@ -46,12 +36,8 @@ body.dark-theme {
     background-color: var(--dark-bg);
     background-image: radial-gradient(circle at 10% 0%, rgba(124, 15, 15, 0.4), rgba(0,0,0,0) 50%);
     background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    /* === পরিবর্তন: প্যাডিং 15px থেকে কমিয়ে 10px করা হয়েছে === */
-    padding: 7px; 
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    padding: 10px;
 }
 
 .page-header { 
@@ -69,78 +55,57 @@ body.dark-theme {
 .header-text { color: var(--primary-red); font-weight: 700; font-size: 1.2em; }
 .spaced-text { text-transform: uppercase; letter-spacing: 11px; color: var(--text-light); font-weight: 500; font-size: 0.8em;}
 .download-container { width: 100%; max-width: 400px; }
-
 .movie-card { 
-    background-color: var(--dark-bg); 
-    border: 2px solid var(--primary-red); 
-    border-radius: 20px; 
-    padding: 12px 0; 
-    margin-bottom: 25px; 
-    box-shadow: 0 0 20px rgba(255, 31, 31, 0.2); 
+    background-color: var(--dark-bg); border: 2px solid var(--primary-red); border-radius: 20px; 
+    padding: 12px 0; margin-bottom: 25px; box-shadow: 0 0 20px rgba(255, 31, 31, 0.2); 
 }
-
-.movie-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    margin-bottom: 12px;
-    padding: 0 12px; 
-    gap: 10px;
-}
-
-.title-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    min-width: 0; 
-}
-
-#movie-title {
-    font-size: 1.11em; color: var(--text-light); margin: 0; text-align: left; font-weight: 700;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
+.movie-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 0 12px; gap: 10px; }
+.title-container { display: flex; align-items: center; gap: 12px; min-width: 0; }
+#movie-title { font-size: 1.11em; color: var(--text-light); margin: 0; text-align: left; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #language-tags { display: flex; gap: 6px; flex-shrink: 0; }
 .lang-tag { background-color: var(--primary-red); color: white; padding: 4px 12px; font-size: 0.8em; border-radius: 6px; font-weight: 600; }
 
-#quality-selector {
-    background-color: var(--card-bg); color: var(--text-light); border: 1px solid var(--border-color);
-    border-radius: 6px; padding: 5px 8px; font-size: 0.9em; cursor: pointer; flex-shrink: 0;
+/* === নতুন কাস্টম ড্রপডাউনের ডিজাইন === */
+#quality-selector-container { position: relative; }
+.custom-select { width: 100px; position: relative; font-size: 0.9em; }
+.select-selected {
+    background-color: var(--card-bg); color: var(--text-light);
+    border: 1px solid var(--border-color); border-radius: 6px;
+    padding: 5px 12px; cursor: pointer; user-select: none;
+    position: relative;
 }
-#quality-selector:focus { outline: 1px solid var(--primary-red); }
+.select-selected:after {
+    position: absolute; content: ""; top: 12px; right: 10px;
+    width: 0; height: 0;
+    border: 5px solid transparent;
+    border-color: #fff transparent transparent transparent;
+}
+.select-items {
+    position: absolute; background-color: #2e2e2e;
+    top: 110%; left: 0; right: 0; z-index: 99;
+    border-radius: 6px; overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+.select-hide { display: none; }
+.select-items div {
+    color: var(--text-light); padding: 8px 12px; cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+}
+.select-items div:last-child { border-bottom: none; }
+.select-items div:hover { background-color: rgba(255, 31, 31, 0.2); }
+.same-as-selected { background-color: var(--primary-red); }
+/* ======================================= */
 
-#media-display-container {
-    border-radius: 12px;
-    overflow: hidden;
-    font-size: 0;
-}
-#media-display-container .movie-poster { 
-    width: 100%; 
-    aspect-ratio: 16 / 9; 
-    display: block; 
-    margin: 0 auto;
-    padding: 0;
-    border: none; 
-}
-
+#media-display-container { border-radius: 12px; overflow: hidden; font-size: 0; }
+#media-display-container .movie-poster { width: 100%; aspect-ratio: 16 / 9; display: block; margin: 0 auto; padding: 0; border: none; }
 .download-section { background-color: var(--card-bg); border-radius: 16px; padding: 15px; }
 .download-section h2 { color: var(--text-light); text-align: left; margin: 0 0 15px 5px; font-weight: 600; font-size: 1.4em; }
 #download-links-container { display: flex; flex-direction: column; gap: 12px; }
-.download-item { 
-    display: flex; align-items: center; justify-content: space-between; background-color: var(--box-bg); 
-    padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); 
-}
-.quality-badge { 
-    width: 45px; height: 45px; background-color: var(--primary-red); color: var(--text-light); display: flex; 
-    justify-content: center; align-items: center; font-weight: 700; font-size: 0.9em;
-    border-radius: 8px; flex-shrink: 0; box-shadow: 0 0 10px rgba(255, 31, 31, 0.3);
-}
+.download-item { display: flex; align-items: center; justify-content: space-between; background-color: var(--box-bg); padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); }
+.quality-badge { width: 45px; height: 45px; background-color: var(--primary-red); color: var(--text-light); display: flex; justify-content: center; align-items: center; font-weight: 700; font-size: 0.9em; border-radius: 8px; flex-shrink: 0; box-shadow: 0 0 10px rgba(255, 31, 31, 0.3); }
 .download-info { flex-grow: 1; margin: 0 15px; }
 .download-info h3 { margin: 0; color: var(--text-light); font-size: 1.1em; font-weight: 600; }
 .download-info p { margin: 2px 0 0 0; color: var(--text-dark); font-size: 0.8em; text-align: left; }
-.download-button { 
-    background-color: var(--primary-red); color: white; text-decoration: none; padding: 10px 15px; border-radius: 8px; 
-    display: flex; align-items: center; gap: 8px; font-weight: 500; transition: background-color 0.2s, transform 0.2s; 
-    white-space: nowrap; box-shadow: 0 4px 10px rgba(255, 31, 31, 0.2);
-}
+.download-button { background-color: var(--primary-red); color: white; text-decoration: none; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-weight: 500; transition: background-color 0.2s, transform 0.2s; white-space: nowrap; box-shadow: 0 4px 10px rgba(255, 31, 31, 0.2); }
 .download-button svg { width: 20px; height: 20px; }
 .download-button:hover { background-color: #ff3c3c; transform: scale(1.05); }
