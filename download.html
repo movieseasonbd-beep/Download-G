@@ -20,16 +20,18 @@
 
     <main class="download-container">
         <div class="movie-card">
+            <!-- === পরিবর্তন: movie-header এর গঠন পরিবর্তন করা হয়েছে === -->
             <div class="movie-header">
-                <h1 id="movie-title">Movie Title</h1>
-                <!-- === পরিবর্তন: ড্রপডাউন ও ভাষা ট্যাগের জন্য কন্টেইনার === -->
-                <div class="header-controls">
+                <div class="title-container">
+                    <h1 id="movie-title">Movie Title</h1>
                     <div id="quality-selector-container"></div>
-                    <div id="language-tags"></div>
                 </div>
+                <div id="language-tags"></div>
             </div>
-            <!-- === পরিবর্তন: পোস্টার বা ভিডিওর জন্য ডাইনামিক কন্টেইনার === -->
-            <div id="media-display-container"></div>
+            
+            <div id="media-display-container">
+                <!-- Media (Poster or Player) will be injected here by JS -->
+            </div>
         </div>
 
         <div class="download-section">
