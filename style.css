@@ -51,7 +51,7 @@ body.dark-theme {
     align-items: center;
     justify-content: flex-start;
     /* === পরিবর্তন: প্যাডিং 15px থেকে কমিয়ে 10px করা হয়েছে === */
-    padding: 10px; 
+    padding: 0px; 
 }
 
 .page-header { 
