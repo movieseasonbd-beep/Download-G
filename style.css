@@ -68,28 +68,35 @@ body.dark-theme {
 .header-text { color: var(--primary-red); font-weight: 700; font-size: 1.2em; }
 .spaced-text { text-transform: uppercase; letter-spacing: 11px; color: var(--text-light); font-weight: 500; font-size: 0.8em;}
 .download-container { width: 100%; max-width: 400px; }
+
+/* === এখানে চূড়ান্ত পরিবর্তনটি করা হয়েছে === */
 .movie-card { 
-    background-color: var(--dark-bg); border: 2px solid var(--primary-red); border-radius: 20px; 
-    padding: 12px; margin-bottom: 25px; box-shadow: 0 0 20px rgba(255, 31, 31, 0.2); 
+    background-color: var(--dark-bg); 
+    border: 2px solid var(--primary-red); 
+    border-radius: 20px; 
+    /* দুই পাশের padding সরিয়ে দেওয়া হয়েছে যাতে প্লেয়ার পুরো জায়গা পায় */
+    padding: 12px 0; 
+    margin-bottom: 25px; 
+    box-shadow: 0 0 20px rgba(255, 31, 31, 0.2); 
 }
 
-/* === এই সেকশনে চূড়ান্ত সমাধানটি করা হয়েছে === */
 .movie-header {
     display: flex;
     justify-content: space-between;
     align-items: center; 
     margin-bottom: 12px;
-    padding: 0 5px;
+    /* সরানো padding এখানে যোগ করা হয়েছে */
+    padding: 0 12px; 
     gap: 10px;
 }
+/* ======================================= */
 
 .title-container {
     display: flex;
     align-items: center;
     gap: 12px;
-    min-width: 0; /* <<<--- এই একটি লাইনই সব সমস্যার সমাধান করবে */
+    min-width: 0; 
 }
-/* ======================================= */
 
 #movie-title {
     font-size: 1.11em; color: var(--text-light); margin: 0; text-align: left; font-weight: 700;
