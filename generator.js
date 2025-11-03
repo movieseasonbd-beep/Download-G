@@ -26,39 +26,35 @@ document.addEventListener('DOMContentLoaded', () => {
         const params = new URLSearchParams();
         
         const movieName = document.getElementById('movie-name').value.trim();
-        const posterLink = document.getElementById('poster-link').value.trim();
+        const playerLink = document.getElementById('player-link').value.trim(); // পরিবর্তিত লাইন
         const languages = document.getElementById('languages').value.trim();
 
-        if (!movieName || !posterLink || !languages) {
-            alert('অনুগ্রহ করে মুভির নাম, পোস্টার এবং ভাষা পূরণ করুন।');
+        if (!movieName || !playerLink || !languages) { // পরিবর্তিত লাইন
+            alert('অনুগ্রহ করে মুভির নাম, প্লেয়ার লিঙ্ক এবং ভাষা পূরণ করুন।'); // পরিবর্তিত লাইন
             return;
         }
 
         params.append('title', movieName);
-        params.append('poster', posterLink);
+        params.append('playerUrl', playerLink); // পরিবর্তিত লাইন
         params.append('langs', languages);
 
         const linkGroups = document.querySelectorAll('.link-group');
         let linkDataFound = false;
-        let validLinkCounter = 0; // একটি নতুন কাউন্টার যোগ করুন
+        let validLinkCounter = 0; 
 
-        linkGroups.forEach(group => { // এখান থেকে index বাদ দিন
+        linkGroups.forEach(group => { 
             const label = group.querySelector('.link-label').value.trim();
             const desc = group.querySelector('.link-desc').value.trim();
             const url = group.querySelector('.link-url').value.trim();
             
-            // শুধুমাত্র লেবেল এবং ইউআরএল থাকলেই লিঙ্ক তৈরি হবে
-if (label && url) { // <<<--- এখান থেকে desc সরানো হয়েছে
-    params.append(`lb${validLinkCounter}`, label);
-    
-    // desc থাকলে যোগ হবে, না থাকলে খালি স্ট্রিং হিসেবে যাবে
-    params.append(`ds${validLinkCounter}`, desc || ''); 
-    
-    params.append(`ul${validLinkCounter}`, url);
-    
-    validLinkCounter++;
-    linkDataFound = true;
-}
+            if (label && url) {
+                params.append(`lb${validLinkCounter}`, label);
+                params.append(`ds${validLinkCounter}`, desc || ''); 
+                params.append(`ul${validLinkCounter}`, url);
+                
+                validLinkCounter++;
+                linkDataFound = true;
+            }
         });
 
         if (!linkDataFound) {
