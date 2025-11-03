@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Populate movie info
     const movieTitle = params.get('title');
-    const posterLink = params.get('poster');
+    const playerUrl = params.get('playerUrl'); // পরিবর্তিত লাইন
     const languages = params.get('langs');
     const pageTitle = document.querySelector('title');
 
@@ -11,7 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('movie-title').textContent = movieTitle;
         pageTitle.textContent = `${movieTitle} - Download Links`; // Set page title
     }
-    if (posterLink) document.getElementById('poster-img').src = posterLink;
+
+    if (playerUrl) { // পরিবর্তিত ব্লক
+        document.getElementById('video-player').src = playerUrl;
+    }
     
     const languageTagsContainer = document.getElementById('language-tags');
     if (languages) {
@@ -34,10 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const desc = params.get(`ds${i}`);
         const url = params.get(`ul${i}`);
         
-       let badgeText = 'SD'; // ডিফল্ট হিসেবে SD থাকবে
-if (label.includes('720')) badgeText = 'HD'; // 720p হলে HD
-if (label.includes('1080')) badgeText = 'FHD'; // 1080p হলে FHD
-if (label.toLowerCase().includes('4k')) badgeText = '4K'; // 4K হলে 4K
+        let badgeText = 'SD'; 
+        if (label.includes('720')) badgeText = 'HD';
+        if (label.includes('1080')) badgeText = 'FHD';
+        if (label.toLowerCase().includes('4k')) badgeText = '4K';
 
         linksHTML += `
             <div class="download-item">
