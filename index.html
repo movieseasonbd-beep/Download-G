@@ -13,16 +13,18 @@
         
         <div class="form-section">
             <input type="text" id="movie-name" placeholder="মুভির নাম (e.g., Pushpa 2)" required>
-            <input type="url" id="poster-link" placeholder="পোস্টার লিঙ্ক (অপশনাল)" >
-            <input type="text" id="languages" placeholder="ভাষা (e.g., Hindi, Bangla)" required>
+            <!-- === পরিবর্তন: একটি ফিল্ড পোস্টার বা প্লেয়ার উভয়ের জন্য === -->
+            <input type="url" id="media-link" placeholder="পোস্টার বা ডিফল্ট প্লেয়ার লিঙ্ক (ঐচ্ছিক)" >
+            <input type="text" id="languages" placeholder="ভাষা (e.g., Hindi, Bangla, Tamil)" required>
         </div>
 
-        <!-- === নতুন সেকশন: ভিডিও প্লেয়ার লিঙ্ক === -->
-        <div class="form-section" id="player-links-container">
-            <h2>ভিডিও প্লেয়ার অপশন</h2>
-            <!-- Player link groups will be added here by JavaScript -->
+        <!-- === নতুন সেকশন: অনলাইন দেখার জন্য একাধিক লিঙ্ক === -->
+        <div class="form-section" id="stream-links-container">
+            <h2>অনলাইন দেখার অপশন (ঐচ্ছিক)</h2>
+            <!-- Streaming link groups will be added here by JavaScript -->
         </div>
-        <button id="add-player-btn" class="secondary-btn">আরও একটি প্লেয়ার অপশন যোগ করুন</button>
+        <button id="add-stream-btn" class="secondary-btn">আরও একটি দেখার অপশন যোগ করুন</button>
+
 
         <div class="form-section" id="links-container">
             <h2>ডাউনলোড অপশন</h2>
