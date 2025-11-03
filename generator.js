@@ -1,12 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // === পরিবর্তন শুরু: নতুন এলিমেন্ট যুক্ত করা ===
+    const streamLinksContainer = document.getElementById('stream-links-container');
+    const addStreamBtn = document.getElementById('add-stream-btn');
     const linksContainer = document.getElementById('links-container');
     const addLinkBtn = document.getElementById('add-link-btn');
     const generateBtn = document.getElementById('generate-btn');
     const outputContainer = document.getElementById('output-container');
     const outputLinkInput = document.getElementById('output-link');
     const copyBtn = document.getElementById('copy-btn');
+    // === পরিবর্তন শেষ ===
 
-    function addLinkField() {
+    // === নতুন ফাংশন: স্ট্রিমিং লিঙ্ক ফিল্ড যোগ করার জন্য ===
+    function addStreamField() {
+        const div = document.createElement('div');
+        div.classList.add('link-group', 'stream-group'); // নতুন ক্লাস 'stream-group'
+        div.innerHTML = `
+            <input type="text" placeholder="Quality Label (e.g., 1080p)" class="stream-label" required>
+            <input type="url" placeholder="Player URL" class="stream-url" required>
+            <button class="remove-btn">মুছুন</button>
+        `;
+        streamLinksContainer.appendChild(div);
+        div.querySelector('.remove-btn').addEventListener('click', () => div.remove());
+    }
+
+    function addDownloadField() {
         const div = document.createElement('div');
         div.classList.add('link-group');
         div.innerHTML = `
@@ -19,30 +36,46 @@ document.addEventListener('DOMContentLoaded', () => {
         div.querySelector('.remove-btn').addEventListener('click', () => div.remove());
     }
 
-    addLinkBtn.addEventListener('click', addLinkField);
-    addLinkField(); // Start with one field
+    addStreamBtn.addEventListener('click', addStreamField);
+    addLinkBtn.addEventListener('click', addDownloadField);
+    addDownloadField(); // ডাউনলোড লিঙ্কের জন্য একটি ফিল্ড ডিফল্টভাবে থাকবে
 
     generateBtn.addEventListener('click', () => {
         const params = new URLSearchParams();
         
         const movieName = document.getElementById('movie-name').value.trim();
-        const playerLink = document.getElementById('player-link').value.trim(); // পরিবর্তিত লাইন
+        const mediaLink = document.getElementById('media-link').value.trim(); // পরিবর্তিত
         const languages = document.getElementById('languages').value.trim();
 
-        if (!movieName || !playerLink || !languages) { // পরিবর্তিত লাইন
-            alert('অনুগ্রহ করে মুভির নাম, প্লেয়ার লিঙ্ক এবং ভাষা পূরণ করুন।'); // পরিবর্তিত লাইন
+        if (!movieName || !languages) {
+            alert('অনুগ্রহ করে মুভির নাম এবং ভাষা পূরণ করুন।');
             return;
         }
 
         params.append('title', movieName);
-        params.append('playerUrl', playerLink); // পরিবর্তিত লাইন
+        if (mediaLink) { // mediaLink ঐচ্ছিক
+            params.append('media', mediaLink);
+        }
         params.append('langs', languages);
 
-        const linkGroups = document.querySelectorAll('.link-group');
-        let linkDataFound = false;
-        let validLinkCounter = 0; 
+        // === নতুন কোড: স্ট্রিমিং লিঙ্ক প্রসেস করার জন্য ===
+        const streamGroups = document.querySelectorAll('.stream-group');
+        let streamCounter = 0;
+        streamGroups.forEach(group => {
+            const label = group.querySelector('.stream-label').value.trim();
+            const url = group.querySelector('.stream-url').value.trim();
+            if (label && url) {
+                params.append(`slb${streamCounter}`, label);
+                params.append(`sul${streamCounter}`, url);
+                streamCounter++;
+            }
+        });
 
-        linkGroups.forEach(group => { 
+        const linkGroups = document.querySelectorAll('.link-group:not(.stream-group)'); // শুধু ডাউনলোড লিঙ্ক
+        let linkDataFound = false;
+        let validLinkCounter = 0;
+
+        linkGroups.forEach(group => {
             const label = group.querySelector('.link-label').value.trim();
             const desc = group.querySelector('.link-desc').value.trim();
             const url = group.querySelector('.link-url').value.trim();
