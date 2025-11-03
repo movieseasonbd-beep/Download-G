@@ -73,7 +73,6 @@ body.dark-theme {
     padding: 12px; margin-bottom: 25px; box-shadow: 0 0 20px rgba(255, 31, 31, 0.2); 
 }
 
-/* === এই সেকশনে মূল পরিবর্তনটি করা হয়েছে === */
 .movie-header {
     display: flex;
     justify-content: space-between;
@@ -81,10 +80,8 @@ body.dark-theme {
     margin-bottom: 12px;
     padding: 0 5px;
     gap: 10px;
-    flex-wrap: wrap; /* <<<--- এই একটি লাইনই মোবাইল ভিউয়ের সমস্যা সমাধান করবে */
+    flex-wrap: wrap; 
 }
-/* ======================================= */
-
 .title-container { display: flex; align-items: center; gap: 12px; min-width: 0; }
 #movie-title {
     font-size: 1.11em; color: var(--text-light); margin: 0; text-align: left; font-weight: 700;
@@ -135,3 +132,22 @@ body.dark-theme {
 }
 .download-button svg { width: 20px; height: 20px; }
 .download-button:hover { background-color: #ff3c3c; transform: scale(1.05); }
+
+
+/* === Media Query for Mobile Devices (The Final Fix) === */
+@media (max-width: 420px) {
+    .movie-header {
+        flex-direction: column; /* এলিমেন্টগুলোকে একটির নিচে আরেকটি সাজায় */
+        align-items: stretch;  /* এলিমেন্টগুলোকে পুরো প্রস্থ জুড়ে দেয় */
+    }
+
+    .title-container {
+        width: 100%; /* পুরো প্রস্থ নেয় */
+        justify-content: space-between; /* টাইটেল বামে এবং ড্রপডাউন ডানে রাখে */
+    }
+    
+    #language-tags {
+        margin-top: 8px; /* উপরের অংশ থেকে একটু ফাঁকা জায়গা তৈরি করে */
+        justify-content: flex-end; /* ভাষা ট্যাগটিকে ডানদিকে পাঠায় */
+    }
+}
