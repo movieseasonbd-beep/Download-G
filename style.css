@@ -40,11 +40,9 @@ button { background-color: var(--primary-red); color: white; border: none; paddi
 
 /* Dark Theme and Download Page Styles */
 body.dark-theme {
-    /* === নতুন ব্যাকগ্রাউন্ড ইফেক্ট === */
     background-color: var(--dark-bg);
     background-image: radial-gradient(circle at 10% 0%, rgba(124, 15, 15, 0.4), rgba(0,0,0,0) 50%);
     background-repeat: no-repeat;
-    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,115 +50,69 @@ body.dark-theme {
     padding: 15px;
 }
 
-/* Header and Glassmorphism Styles */
 .page-header { 
-    display: flex; 
-    align-items: center; 
-    gap: 15px; 
-    margin-bottom: 25px; 
-    width: 100%; 
-    max-width: 400px; 
-    box-sizing: border-box;
-    padding: 8px 8px; 
-    border-radius: 50px;
-    
-    /* Glassmorphism Effect */
-    background: rgba(26, 26, 26, 0.41);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex; align-items: center; gap: 15px; margin-bottom: 25px; width: 100%; max-width: 400px; box-sizing: border-box;
+    padding: 8px; border-radius: 50px; background: rgba(26, 26, 26, 0.41); backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
-
-/* Circular Logo with Red/Black Background */
 .logo-container {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    background-color: #000000;
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; background-color: #000000;
     background-image: radial-gradient(circle at center, rgba(255, 31, 31, 0.5) 0%, rgba(0,0,0,0) 70%);
-    border: 1px solid rgba(255, 31, 31, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    border: 1px solid rgba(255, 31, 31, 0.4); display: flex; justify-content: center; align-items: center; overflow: hidden;
 }
-
-.logo {
-    width: 40px;
-    height: 40px;
-}
-
+.logo { width: 40px; height: 40px; }
 .header-title-container { display: flex; flex-direction: column; line-height: 1.1; }
 .header-text { color: var(--primary-red); font-weight: 700; font-size: 1.2em; }
 .spaced-text { text-transform: uppercase; letter-spacing: 11px; color: var(--text-light); font-weight: 500; font-size: 0.8em;}
-
 .download-container { width: 100%; max-width: 400px; }
 .movie-card { 
-    background-color: var(--dark-bg); 
-    border: 2px solid var(--primary-red); 
-    border-radius: 20px; 
-    padding: 12px; 
-    margin-bottom: 25px; 
-    box-shadow: 0 0 20px rgba(255, 31, 31, 0.2); 
+    background-color: var(--dark-bg); border: 2px solid var(--primary-red); border-radius: 20px; 
+    padding: 12px; margin-bottom: 25px; box-shadow: 0 0 20px rgba(255, 31, 31, 0.2); 
 }
-.movie-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 0 5px; }
-#movie-title { font-size: 1.11em; color: var(--text-light); margin: 0; text-align: left; font-weight: 700; }
+/* === পরিবর্তন: movie-header এর স্টাইল আপডেট === */
+.movie-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; padding: 0 5px; gap: 10px;}
+#movie-title { font-size: 1.11em; color: var(--text-light); margin: 0; text-align: left; font-weight: 700; flex-grow: 1; }
+.header-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
 #language-tags { display: flex; gap: 6px; }
 .lang-tag { background-color: var(--primary-red); color: white; padding: 4px 12px; font-size: 0.8em; border-radius: 6px; font-weight: 600; }
 
-/* === এখানে পরিবর্তন করা হয়েছে === */
-.movie-poster { 
-    width: 100%; 
-    border-radius: 12px; 
-    display: block; 
-    border: none; /* iframe এর ডিফল্ট বর্ডার মুছে ফেলার জন্য */
-    aspect-ratio: 16 / 9; /* ভিডিওর জন্য একটি স্ট্যান্ডার্ড অনুপাত */
+/* === নতুন স্টাইল: কোয়ালিটি ড্রপডাউনের জন্য === */
+#quality-selector {
+    background-color: var(--card-bg);
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+#quality-selector:focus {
+    outline: 1px solid var(--primary-red);
 }
 
+/* === পরিবর্তন: মিডিয়া কন্টেইনারের জন্য === */
+#media-display-container .movie-poster { 
+    width: 100%; border-radius: 12px; display: block; border: none; aspect-ratio: 16 / 9; 
+}
 .download-section { background-color: var(--card-bg); border-radius: 16px; padding: 15px; }
 .download-section h2 { color: var(--text-light); text-align: left; margin: 0 0 15px 5px; font-weight: 600; font-size: 1.4em; }
 #download-links-container { display: flex; flex-direction: column; gap: 12px; }
 .download-item { 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    background-color: var(--box-bg); 
-    padding: 12px; 
-    border-radius: 12px; 
-    border: 1px solid var(--border-color); 
+    display: flex; align-items: center; justify-content: space-between; background-color: var(--box-bg); 
+    padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); 
 }
 .quality-badge { 
-    width: 45px; 
-    height: 45px; 
-    background-color: var(--primary-red); 
-    color: var(--text-light); 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    font-weight: 700; 
-    font-size: 0.9em;
-    border-radius: 8px; 
-    flex-shrink: 0;
-    box-shadow: 0 0 10px rgba(255, 31, 31, 0.3);
+    width: 45px; height: 45px; background-color: var(--primary-red); color: var(--text-light); display: flex; 
+    justify-content: center; align-items: center; font-weight: 700; font-size: 0.9em;
+    border-radius: 8px; flex-shrink: 0; box-shadow: 0 0 10px rgba(255, 31, 31, 0.3);
 }
 .download-info { flex-grow: 1; margin: 0 15px; }
 .download-info h3 { margin: 0; color: var(--text-light); font-size: 1.1em; font-weight: 600; }
 .download-info p { margin: 2px 0 0 0; color: var(--text-dark); font-size: 0.8em; text-align: left; }
 .download-button { 
-    background-color: var(--primary-red); 
-    color: white; 
-    text-decoration: none; 
-    padding: 10px 15px; 
-    border-radius: 8px; 
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-    font-weight: 500; 
-    transition: background-color 0.2s, transform 0.2s; 
-    white-space: nowrap;
-    box-shadow: 0 4px 10px rgba(255, 31, 31, 0.2);
+    background-color: var(--primary-red); color: white; text-decoration: none; padding: 10px 15px; border-radius: 8px; 
+    display: flex; align-items: center; gap: 8px; font-weight: 500; transition: background-color 0.2s, transform 0.2s; 
+    white-space: nowrap; box-shadow: 0 4px 10px rgba(255, 31, 31, 0.2);
 }
 .download-button svg { width: 20px; height: 20px; }
 .download-button:hover { background-color: #ff3c3c; transform: scale(1.05); }
