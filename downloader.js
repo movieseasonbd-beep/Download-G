@@ -3,7 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Populate movie info
     const movieTitle = params.get('title');
-    const mediaLink = params.get('media'); // media লিঙ্ক (পোস্টার বা প্লেয়ার)
+    
+    // === পরিবর্তন: পুরনো 'poster' এবং নতুন 'media' দুটোকেই সাপোর্ট করার জন্য ===
+    // যদি 'media' থাকে সেটা নিবে, না থাকলে 'poster' আছে কিনা দেখবে।
+    const finalMediaLink = params.get('media') || params.get('poster'); 
+    
     const languages = params.get('langs');
     const pageTitle = document.querySelector('title');
 
@@ -24,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         i++;
     }
 
-    // === নতুন যুক্তি: স্ট্রিমিং অপশন বা মিডিয়া লিঙ্ক দেখানোর জন্য ===
+    // স্ট্রিমিং অপশন বা মিডিয়া লিঙ্ক দেখানোর যুক্তি
     if (streamingOptions.length > 0) {
         // ড্রপডাউন তৈরি করুন
         const select = document.createElement('select');
@@ -39,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // iframe প্লেয়ার তৈরি করুন
         const iframe = document.createElement('iframe');
-        iframe.className = 'movie-poster'; // একই স্টাইল ব্যবহার করবে
+        iframe.className = 'movie-poster';
         iframe.src = streamingOptions[0].url; // প্রথম লিঙ্কটি ডিফল্ট হিসেবে দেখাবে
         iframe.frameBorder = "0";
         iframe.allowFullscreen = true;
@@ -50,19 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
             iframe.src = e.target.value;
         });
 
-    } else if (mediaLink) {
+    } else if (finalMediaLink) { // === পরিবর্তন: এখানে finalMediaLink ব্যবহার করা হয়েছে ===
         // যদি শুধু একটি মিডিয়া লিঙ্ক থাকে (পোস্টার বা ভিডিও)
-        if (mediaLink.includes('vercel.app') || mediaLink.includes('youtube.com/embed')) {
+        // লিঙ্কটি প্লেয়ারের কিনা তা जांच করা হচ্ছে
+        if (finalMediaLink.includes('vercel.app') || finalMediaLink.includes('youtube.com/embed')) {
             const iframe = document.createElement('iframe');
             iframe.className = 'movie-poster';
-            iframe.src = mediaLink;
+            iframe.src = finalMediaLink;
             iframe.frameBorder = "0";
             iframe.allowFullscreen = true;
             mediaContainer.appendChild(iframe);
         } else {
+            // লিঙ্কটি একটি ছবি হলে
             const img = document.createElement('img');
             img.className = 'movie-poster';
-            img.src = mediaLink;
+            img.src = finalMediaLink;
             img.alt = 'Movie Poster';
             mediaContainer.appendChild(img);
         }
@@ -70,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const languageTagsContainer = document.getElementById('language-tags');
     if (languages) {
+        languageTagsContainer.style.marginTop = '8px'; // ভাষা ট্যাগ থাকলে ড্রপডাউন থেকে একটু নিচে দেখাবে
         languages.split(',').forEach(lang => {
             const tag = document.createElement('span');
             tag.className = 'lang-tag';
@@ -78,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ডাউনলোড লিঙ্ক পপুলেট করার কোড অপরিবর্তিত
+    // ডাউনলোড লিঙ্ক পপুলেট করার কোড
     const linksContainer = document.getElementById('download-links-container');
     const loadingMessage = document.getElementById('loading-message');
     let linksHTML = '';
