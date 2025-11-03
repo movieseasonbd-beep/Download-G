@@ -70,42 +70,35 @@ body.dark-theme {
     padding: 12px; margin-bottom: 25px; box-shadow: 0 0 20px rgba(255, 31, 31, 0.2); 
 }
 
-/* === পরিবর্তন: movie-header এবং এর ভেতরের এলিমেন্টের জন্য নতুন স্টাইল === */
 .movie-header {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* এলিমেন্টগুলোকে উল্লম্বভাবে মাঝখানে রাখে */
+    align-items: center; 
     margin-bottom: 12px;
     padding: 0 5px;
     gap: 10px;
 }
-
 .title-container {
     display: flex;
     align-items: center;
-    gap: 12px; /* টাইটেল এবং ড্রপডাউনের মধ্যে ফাঁকা জায়গা */
-    min-width: 0; /* Flexbox item সংকুচিত হতে সাহায্য করে */
+    gap: 12px; 
+    min-width: 0; 
 }
-
 #movie-title {
     font-size: 1.11em;
     color: var(--text-light);
     margin: 0;
     text-align: left;
     font-weight: 700;
-    /* লম্বা টাইটেল কেটে যাওয়ার জন্য */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
 #language-tags {
     display: flex;
     gap: 6px;
-    flex-shrink: 0; /* ভাষা ট্যাগকে সংকুচিত হতে বাধা দেয় */
+    flex-shrink: 0; 
 }
-/* =================================================================== */
-
 .lang-tag { background-color: var(--primary-red); color: white; padding: 4px 12px; font-size: 0.8em; border-radius: 6px; font-weight: 600; }
 
 #quality-selector {
@@ -122,19 +115,24 @@ body.dark-theme {
     outline: 1px solid var(--primary-red);
 }
 
-/* === পরিবর্তন: প্লেয়ারের ওভারফ্লো সমস্যা সমাধানের জন্য === */
+/* === পরিবর্তন: প্লেয়ারের লেআউট এবং ওভারফ্লো সমস্যার চূড়ান্ত সমাধান === */
 #media-display-container {
     border-radius: 12px;
-    overflow: hidden; /* ভেতরের iframe কে বাইরে যেতে বাধা দেয় */
-    line-height: 0; /* iframe এর নিচে অতিরিক্ত ফাঁকা জায়গা দূর করে */
+    overflow: hidden;
+    /* এই লাইনটি iframe এর নিচে বা পাশে অতিরিক্ত ফাঁকা স্থান দূর করতে সাহায্য করে */
+    font-size: 0;
 }
-#media-display-container .movie-poster { 
+#media-display-container .movie-poster { /* এই ক্লাসটি img এবং iframe উভয়ের উপর প্রযোজ্য */
     width: 100%; 
-    display: block; 
-    border: none; 
     aspect-ratio: 16 / 9; 
+    
+    /* নিশ্চিত করা হচ্ছে যেন কোনো অতিরিক্ত মার্জিন বা বর্ডার না থাকে */
+    display: block; 
+    margin: 0 auto; /* মাঝখানে আনার জন্য */
+    padding: 0;
+    border: none; 
 }
-/* ======================================================== */
+/* =================================================================== */
 
 .download-section { background-color: var(--card-bg); border-radius: 16px; padding: 15px; }
 .download-section h2 { color: var(--text-light); text-align: left; margin: 0 0 15px 5px; font-weight: 600; font-size: 1.4em; }
