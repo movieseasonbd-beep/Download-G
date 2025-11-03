@@ -3,19 +3,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Populate movie info
     const movieTitle = params.get('title');
-    const playerUrl = params.get('playerUrl'); // পরিবর্তিত লাইন
+    const mediaLink = params.get('media'); // media লিঙ্ক (পোস্টার বা প্লেয়ার)
     const languages = params.get('langs');
     const pageTitle = document.querySelector('title');
 
     if (movieTitle) {
         document.getElementById('movie-title').textContent = movieTitle;
-        pageTitle.textContent = `${movieTitle} - Download Links`; // Set page title
+        pageTitle.textContent = `${movieTitle} - Download Links`;
     }
 
-    if (playerUrl) { // পরিবর্তিত ব্লক
-        document.getElementById('video-player').src = playerUrl;
+    const mediaContainer = document.getElementById('media-display-container');
+    const qualitySelectorContainer = document.getElementById('quality-selector-container');
+    const streamingOptions = [];
+    let i = 0;
+    while(params.has(`slb${i}`)) {
+        streamingOptions.push({
+            label: params.get(`slb${i}`),
+            url: params.get(`sul${i}`)
+        });
+        i++;
     }
-    
+
+    // === নতুন যুক্তি: স্ট্রিমিং অপশন বা মিডিয়া লিঙ্ক দেখানোর জন্য ===
+    if (streamingOptions.length > 0) {
+        // ড্রপডাউন তৈরি করুন
+        const select = document.createElement('select');
+        select.id = 'quality-selector';
+        streamingOptions.forEach(option => {
+            const opt = document.createElement('option');
+            opt.value = option.url;
+            opt.textContent = option.label;
+            select.appendChild(opt);
+        });
+        qualitySelectorContainer.appendChild(select);
+
+        // iframe প্লেয়ার তৈরি করুন
+        const iframe = document.createElement('iframe');
+        iframe.className = 'movie-poster'; // একই স্টাইল ব্যবহার করবে
+        iframe.src = streamingOptions[0].url; // প্রথম লিঙ্কটি ডিফল্ট হিসেবে দেখাবে
+        iframe.frameBorder = "0";
+        iframe.allowFullscreen = true;
+        mediaContainer.appendChild(iframe);
+
+        // ড্রপডাউন পরিবর্তনের ইভেন্ট লিসেনার
+        select.addEventListener('change', (e) => {
+            iframe.src = e.target.value;
+        });
+
+    } else if (mediaLink) {
+        // যদি শুধু একটি মিডিয়া লিঙ্ক থাকে (পোস্টার বা ভিডিও)
+        if (mediaLink.includes('vercel.app') || mediaLink.includes('youtube.com/embed')) {
+            const iframe = document.createElement('iframe');
+            iframe.className = 'movie-poster';
+            iframe.src = mediaLink;
+            iframe.frameBorder = "0";
+            iframe.allowFullscreen = true;
+            mediaContainer.appendChild(iframe);
+        } else {
+            const img = document.createElement('img');
+            img.className = 'movie-poster';
+            img.src = mediaLink;
+            img.alt = 'Movie Poster';
+            mediaContainer.appendChild(img);
+        }
+    }
+
     const languageTagsContainer = document.getElementById('language-tags');
     if (languages) {
         languages.split(',').forEach(lang => {
@@ -26,16 +78,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Populate download links
+    // ডাউনলোড লিঙ্ক পপুলেট করার কোড অপরিবর্তিত
     const linksContainer = document.getElementById('download-links-container');
     const loadingMessage = document.getElementById('loading-message');
     let linksHTML = '';
-    let i = 0;
+    let j = 0;
 
-    while (params.has(`lb${i}`)) {
-        const label = params.get(`lb${i}`);
-        const desc = params.get(`ds${i}`);
-        const url = params.get(`ul${i}`);
+    while (params.has(`lb${j}`)) {
+        const label = params.get(`lb${j}`);
+        const desc = params.get(`ds${j}`);
+        const url = params.get(`ul${j}`);
         
         let badgeText = 'SD'; 
         if (label.includes('720')) badgeText = 'HD';
@@ -55,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </a>
             </div>
         `;
-        i++;
+        j++;
     }
 
     if (linksHTML) {
