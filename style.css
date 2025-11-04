@@ -53,7 +53,7 @@ body.dark-theme {
 .logo { width: 40px; height: 40px; }
 .header-title-container { display: flex; flex-direction: column; line-height: 1.1; }
 .header-text { color: var(--primary-red); font-weight: 700; font-size: 1.2em; }
-.spaced-text { text-transform: uppercase; letter-spacing: 11px; color: var(--text-light); font-weight: 500; font-size: 0.8em;}
+.spaced-text { text-transform: uppercase; letter-spacing: 8px; color: var(--text-light); font-weight: 500; font-size: 0.8em;}
 .download-container { width: 100%; max-width: 400px; }
 .movie-card { 
     background-color: var(--dark-bg); border: 2px solid var(--primary-red); border-radius: 20px; 
